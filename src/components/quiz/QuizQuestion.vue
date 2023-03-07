@@ -1,8 +1,8 @@
 <template>
   <div v-if="isQuizStarted">
-    <ul v-for="(question, index) in quizQuestions.results" :key="question">
-      <h3 class="uppercase font-sans font-semibold text-xl ml-3 mb-3">
-        {{ question.question }}
+    <ul v-for="(question, index) in normalisedQuestions" :key="question">
+      <h3 class="uppercase font-sans font-semibold text-xl m-3">
+       {{ question }}
       </h3>
       <li
         class="font-sans m-5"
@@ -32,6 +32,7 @@ export default {
     return {
       quizQuestions: {},
       arrayWithAllAnswers: this.getAllAnswers,
+      normalisedQuestions:[],
     };
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
         response.json()
       );
       this.getAllAnswers();
+      this.normaliseQuestions();
     },
     shuffleArray(array: []) {
       let currentIndex = array.length,
@@ -60,7 +62,6 @@ export default {
 
       return array;
     },
-
     getAllAnswers() {
       const questionLetters = ['A', 'B', 'C', 'D'];
 
@@ -84,6 +85,12 @@ export default {
       );
       return arrayWithAllAnswers;
     },
+    normaliseQuestions() {
+        this.normalisedQuestions = this.quizQuestions.results.map((question: any) => {
+            return question.question.replace(/&quot;/g , '"').replace(/&#039;/g , "'");
+        })
+        console.log(this.normalisedQuestions)
+    }
   },
   created() {
     this.fetchTrivia();
