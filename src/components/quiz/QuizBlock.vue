@@ -5,7 +5,7 @@
         ><div class="w-96 h-72 border border-black m-10 shadow-md">
           <div class="image w-full h-3/5 bg-black mb-5"></div>
           <h3 class="uppercase font-sans font-semibold text-xl ml-3 mb-3">
-            <RouterLink to="/">{{
+            <RouterLink to="/quiz-details">{{
             quiz.name
           }}</RouterLink>
             </h3>
