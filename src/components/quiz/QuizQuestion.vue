@@ -31,7 +31,6 @@ export default {
   data() {
     return {
       quizQuestions: {},
-      arrayWithAllAnswers: this.getAllAnswers,
       normalisedQuestions:[],
     };
   },
@@ -62,16 +61,36 @@ export default {
 
       return array;
     },
+    normaliseQuestions() {
+      this.normalisedQuestions = this.quizQuestions.results.map(
+        (question: any) => {
+          return question.question
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'");
+        }
+      );
+    },
+    normaliseAnswers(allAnswers: []) {
+      return allAnswers.map((answer: any) => {
+        return answer
+          .replace(/&quot;/g, '"')
+          .replace(/&#039;/g, "'")
+          .replace(/&rsquo;/g, "'")
+          .replace(/&eacute;/g, 'é')
+          .replace(/&amp;/g, '&');
+      });
+    },
     getAllAnswers() {
       const questionLetters = ['A', 'B', 'C', 'D'];
 
       const arrayWithAllAnswers = this.quizQuestions.results.map(
         (_quizQuestion: any) => {
-          const allAnswers = _quizQuestion.incorrect_answers.concat(
+          let allAnswers = _quizQuestion.incorrect_answers.concat(
             _quizQuestion.correct_answer
           );
 
           this.shuffleArray(allAnswers);
+          allAnswers = this.normaliseAnswers(allAnswers);
 
           const allAnswersList = Object.assign(
             {},
@@ -85,12 +104,6 @@ export default {
       );
       return arrayWithAllAnswers;
     },
-    normaliseQuestions() {
-        this.normalisedQuestions = this.quizQuestions.results.map((question: any) => {
-            return question.question.replace(/&quot;/g , '"').replace(/&#039;/g , "'");
-        })
-        console.log(this.normalisedQuestions)
-    }
   },
   created() {
     this.fetchTrivia();
