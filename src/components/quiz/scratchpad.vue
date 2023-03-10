@@ -2,11 +2,11 @@
   <div v-if="isQuizStarted">
     <ul v-for="(question, index) in normalisedQuestions" :key="question">
       <h3 class="uppercase font-sans font-semibold text-xl m-3">
-       {{ question }}
+        {{ question }}
       </h3>
       <li
         class="font-sans m-5"
-        v-for="(answer, key) in answers() [index]"
+        v-for="(answer, key) in answers()[index]"
         :key="answer"
       >
         {{ key }}: {{ answer }}
@@ -18,45 +18,20 @@
 
 <script lang="ts">
 import BasicButton from '../button/BasicButton.vue';
-// import axios from 'axios';
 
-
-
-// const BASE_URL =
-//   'https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple';
+const BASE_URL =
+  'https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple';
 
 export default {
   components: {
     BasicButton,
   },
-  props: ['isQuizStarted', 'categoryId'],
+  props: ['isQuizStarted'],
   emits: ['start-quiz'],
-  async setup() {
-    const BASE_URL = 'https://opentdb.com/api.php?';
-    let quizQuestions: never[] = [];
-
-    const fetchTrivia = async (index: string | string[]) => {
-        quizQuestions = await fetch(
-        `${BASE_URL}amount=10&category=${index}&difficulty=medium&type=multiple`
-      ).then((response) => response.json());
-      console.log(quizQuestions.results)
-
-      this.getAllAnswers();
-    };
-
-    // const fetchTrivia = (index: string | string[]) => API.get(`amount=10&category=${index}&difficulty=medium&type=multiple`);
-
-    // const data = await fetchTrivia(categoryId);
-
-    return {
-      fetchTrivia,
-      quizQuestions
-    };
-  },
   data() {
     return {
-    //   quizQuestions: this.fetchTrivia(this.categoryId),
-      normalisedQuestions:[],
+      quizQuestions: {},
+      normalisedQuestions: [],
       answers: this.getAllAnswers,
     };
   },
@@ -64,13 +39,13 @@ export default {
     startTheQuiz() {
       this.$emit('start-quiz');
     },
-    // async fetchTrivia() {
-    //   this.quizQuestions = await fetch(BASE_URL).then((response) =>
-    //     response.json()
-    //   );
-    //   this.getAllAnswers();
-    //   this.normaliseQuestions();
-    // },
+    async fetchTrivia() {
+      this.quizQuestions = await fetch(BASE_URL).then((response) =>
+        response.json()
+      );
+      this.getAllAnswers();
+      this.normaliseQuestions();
+    },
     shuffleArray(array: []) {
       let currentIndex = array.length,
         randomIndex;
@@ -115,8 +90,6 @@ export default {
             _quizQuestion.correct_answer
           );
 
-          console.log(allAnswers)
-
           this.shuffleArray(allAnswers);
           allAnswers = this.normaliseAnswers(allAnswers);
 
@@ -134,9 +107,7 @@ export default {
     },
   },
   created() {
-    this.fetchTrivia(this.categoryId);
-    
-    // console.log(this.quizQuestions);
+    this.fetchTrivia();
   },
 };
 </script>

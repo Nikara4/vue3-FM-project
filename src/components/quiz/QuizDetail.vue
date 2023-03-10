@@ -1,16 +1,10 @@
 <template>
   <div>
     <h3 class="uppercase font-sans font-semibold text-2xl ml-3 mb-3">
-      quiz name
+      <pre>{{ quizCategoryName.name }}</pre>
     </h3>
     <p class="ml-5" v-if="!isQuizStarted"
-      >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p
+      >tekst</p
     >
     <BasicButton @click-action="startTheQuiz"> take the quiz </BasicButton>
   </div>
@@ -23,12 +17,33 @@ export default {
   components: {
     BasicButton,
   },
-  props: ['isQuizStarted'],
+  props: ['isQuizStarted', 'categoryId'],
   emits: ['start-quiz'],
+  data() {
+    return {
+      quizCategoryName: {},
+      quizCategory: [
+        { name: 'Entertainment: Books', categoryNumber: '10' },
+        { name: 'Entertainment: Video Games', categoryNumber: '15' },
+        { name: 'Entertainment: Japanese Anime & Manga', categoryNumber: '31' },
+        { name: 'Celebrities', categoryNumber: '26' },
+        { name: 'Animals', categoryNumber: '27' },
+        { name: 'Geography', categoryNumber: '22' },
+      ],
+    }
+  },
   methods: {
     startTheQuiz() {
       this.$emit('start-quiz');
     },
+    getQuizCategory() {
+      this.quizCategoryName =  this.quizCategory.find(category => {
+        return category.categoryNumber === this.categoryId
+      })
+    }
   },
+  created() {
+    this.getQuizCategory()
+  }
 };
 </script>
