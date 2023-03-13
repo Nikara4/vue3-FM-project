@@ -3,8 +3,7 @@
   <main>
     <div class="container mx-auto px-4">
       <div class="flex w-10/12 mx-auto">
-        <h1
-          class="font-sans text-5xl antialiased font-semibold tracking-wider my-8"
+        <h1 class="font-sans text-4xl antialiased font-semibold tracking-wider"
           >Quiz Details</h1
         >
       </div>
@@ -14,11 +13,16 @@
           <QuizDetail
             :isQuizStarted="isQuizStarted"
             @start-quiz="startTheQuiz"
+            :categoryId="routeParams"
           />
-          <QuizQuestion
-            :isQuizStarted="isQuizStarted"
-            @start-quiz="startTheQuiz"
-          />
+          <Suspense>
+            <QuizQuestion
+              :isQuizStarted="isQuizStarted"
+              @start-quiz="startTheQuiz"
+              :categoryId="routeParams"
+            />
+            <template v-slot:fallback>Loading data...</template>
+          </Suspense>
         </div>
       </div>
     </div>
@@ -28,8 +32,17 @@
 <script lang="ts">
 import QuizDetail from '../components/quiz/QuizDetail.vue';
 import QuizQuestion from '../components/quiz/QuizQuestion.vue';
+import { useRoute } from 'vue-router';
 
 export default {
+  setup() {
+    const route = useRoute();
+    const routeParams: string | string[] = route.params.id;
+
+    return {
+      routeParams,
+    };
+  },
   components: {
     QuizDetail,
     QuizQuestion,
@@ -37,7 +50,6 @@ export default {
   data() {
     return {
       isQuizStarted: false,
-
     };
   },
   methods: {
@@ -45,6 +57,5 @@ export default {
       this.isQuizStarted = !this.isQuizStarted;
     },
   },
-
 };
 </script>
