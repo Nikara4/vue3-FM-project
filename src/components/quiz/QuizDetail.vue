@@ -3,9 +3,7 @@
     <h3 class="uppercase font-sans font-semibold text-2xl ml-3 mb-3">
       <pre>{{ quizCategoryName.name }}</pre>
     </h3>
-    <p class="ml-5" v-if="!isQuizStarted"
-      >tekst</p
-    >
+    <p class="ml-5" v-if="!isQuizStarted">tekst</p>
     <BasicButton @click-action="startTheQuiz"> take the quiz </BasicButton>
   </div>
 </template>
@@ -30,20 +28,20 @@ export default {
         { name: 'Animals', categoryNumber: '27' },
         { name: 'Geography', categoryNumber: '22' },
       ],
-    }
+    };
   },
   methods: {
     startTheQuiz() {
       this.$emit('start-quiz');
     },
     getQuizCategory() {
-      this.quizCategoryName =  this.quizCategory.find(category => {
-        return category.categoryNumber === this.categoryId
-      })
-    }
+      this.quizCategoryName = this.quizCategory.find((category) => {
+        return category.categoryNumber === this.categoryId;
+      });
+    },
   },
   created() {
-    this.getQuizCategory()
-  }
+    this.getQuizCategory();
+  },
 };
 </script>

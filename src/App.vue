@@ -31,7 +31,7 @@
           v-for="link in navLinks"
           :key="link.name"
         >
-          <RouterLink :to="{path:link.path}">{{ link.name }}</RouterLink>
+          <RouterLink :to="{ path: link.path }">{{ link.name }}</RouterLink>
         </li>
       </nav>
     </div>
