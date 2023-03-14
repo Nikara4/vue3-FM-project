@@ -11,7 +11,6 @@ import QuizBlockComponent from '../components/quiz/QuizBlock.vue';
 import { useRoute } from 'vue-router';
 
 
-
 export default {
   setup() {
     const route = useRoute();

@@ -12,7 +12,10 @@ module.exports = {
       'mono': ['ui-monospace', 'SFMono-Regular'],
       'display': ['Oswald'],
       'body': ['"Open Sans"'],
-    }
+    },
+    lineHeight: {
+        'quiz-block': '14rem',
+      }
   },
   plugins: [],
 }
