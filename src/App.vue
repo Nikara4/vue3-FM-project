@@ -54,11 +54,9 @@ export default {
       quizzes.value = quizCategory.filter((quiz: { name: string }) =>
         quiz.name.toLowerCase().includes(search.value.toLowerCase())
       );
-      console.log(quizzes.value);
     });
 
     return {
-      quizzes,
       search,
     };
   },

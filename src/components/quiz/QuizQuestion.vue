@@ -5,11 +5,17 @@
         {{ question }}
       </h3>
       <li
-        class="font-sans mx-5 p-3 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300"
+        class="font-sans mx-10 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300 flex"
         v-for="(answer, key) in arrayWithAllAnswers[index]"
         :key="answer"
+        @click="getAnswer(answer)"
+
       >
-        {{ key }}: {{ answer }}
+      <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
+        <span class="block border-r border-black p-3 basis-12 text-center">{{
+          key
+        }}</span
+        ><span class="p-3 block">{{ answer }}</span>
       </li>
     </ul>
     <BasicButton @click-action="startTheQuiz"> next question </BasicButton>
@@ -20,11 +26,6 @@
 import BasicButton from '../button/BasicButton.vue';
 
 export default {
-  components: {
-    BasicButton,
-  },
-  props: ['isQuizStarted', 'categoryId'],
-  emits: ['start-quiz'],
   async setup(props) {
     const BASE_URL = 'https://opentdb.com/api.php?';
 
@@ -111,9 +112,31 @@ export default {
       normalisedQuestions,
     };
   },
+  components: {
+    BasicButton,
+  },
+  props: ['isQuizStarted', 'categoryId'],
+  emits: ['start-quiz'],
+  data() {
+    return {
+      arrayWithUserAnswers: [],
+      // answerSelected: null,
+    };
+  },
   methods: {
     startTheQuiz() {
       this.$emit('start-quiz');
+    },
+    getAnswer(answer: any) {
+for (let i = 0; i < this.arrayWithUserAnswers.length; i++) {}
+
+// napisać logikę dla pętli, która dodaje odpowiedzi do tablicy, usuwa te, które zostały zamienione i nie dodaje tych, które zostały juz wybrane
+
+      this.arrayWithUserAnswers.push(answer);
+      console.log(this.arrayWithUserAnswers);
+
+      // this.answerSelected = answer;
+
     },
   },
 };

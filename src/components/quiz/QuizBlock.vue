@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts">
-// import { quizCategory } from '../../data/quizCategories.js';
 import { quizzes } from '../../composables/quizCategories.js'
 
 
