@@ -1,11 +1,11 @@
 <template>
   <div v-if="isQuizStarted">
     <ul v-for="(question, index) in normalisedQuestions" :key="question">
-      <h3 class="uppercase font-sans font-semibold text-xl m-3">
+      <h3 class="uppercase font-sans font-semibold text-xl mx-10 my-8">
         {{ question }}
       </h3>
       <li
-        class="font-sans m-5"
+        class="font-sans mx-5 p-3 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300"
         v-for="(answer, key) in arrayWithAllAnswers[index]"
         :key="answer"
       >
@@ -49,7 +49,8 @@ export default {
           .replace(/&#039;/g, "'")
           .replace(/&rsquo;/g, "'")
           .replace(/&eacute;/g, 'é')
-          .replace(/&amp;/g, '&');
+          .replace(/&amp;/g, '&')
+          .replace(/&amp;/g, 'ü');
       });
     };
 

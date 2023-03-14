@@ -6,6 +6,7 @@
         ><RouterLink to="/">Quizzes</RouterLink></h1
       >
       <input
+        v-model.trim="search"
         class="border-black border mx-1 my-10 p-2"
         placeholder="Search..."
       />
@@ -41,7 +42,27 @@
 </template>
 
 <script lang="ts">
+import { ref, watch } from 'vue';
+import { quizzes } from './composables/quizCategories.js';
+import { quizCategory } from './data/quizCategories.js';
+
 export default {
+  setup() {
+    const search = ref('');
+
+    watch(search, () => {
+      quizzes.value = quizCategory.filter((quiz: { name: string }) =>
+        quiz.name.toLowerCase().includes(search.value.toLowerCase())
+      );
+      console.log(quizzes.value);
+    });
+
+    return {
+      quizzes,
+      search,
+    };
+  },
+
   data() {
     return {
       navLinks: [

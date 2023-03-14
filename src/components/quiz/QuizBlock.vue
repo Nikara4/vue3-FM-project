@@ -27,41 +27,14 @@
 </template>
 
 <script lang="ts">
+// import { quizCategory } from '../../data/quizCategories.js';
+import { quizzes } from '../../composables/quizCategories.js'
+
+
 export default {
   data() {
     return {
-      quizCategory: [
-        {
-          name: 'Entertainment: Books',
-          categoryNumber: '10',
-          img: 'pexels-books-1472841.jpeg',
-        },
-        {
-          name: 'Entertainment: Video Games',
-          categoryNumber: '15',
-          img: 'pexels-games-442576.jpeg',
-        },
-        {
-          name: 'Entertainment: Japanese Anime & Manga',
-          categoryNumber: '31',
-          img: 'pexels-anime-manga-9334944.jpeg',
-        },
-        {
-          name: 'Celebrities',
-          categoryNumber: '26',
-          img: 'pexels-celebrities-3394310.jpeg',
-        },
-        {
-          name: 'Animals',
-          categoryNumber: '27',
-          img: 'pexels-animals-39627.jpeg',
-        },
-        {
-          name: 'Geography',
-          categoryNumber: '22',
-          img: 'pexels-geography-5008436.jpeg',
-        },
-      ],
+      quizCategory: quizzes
     };
   },
   methods: {
