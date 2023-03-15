@@ -1,5 +1,5 @@
 <template>
-  <div class="home--div__quizes w-10/12 max-h-max mx-auto">
+  <div class="max-h-max mx-auto">
     <ul class="grid grid-cols-3">
       <li v-for="quiz in quizCategory" :key="quiz.categoryNumber">
         <div

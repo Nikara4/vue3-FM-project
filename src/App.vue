@@ -24,11 +24,10 @@
           d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
         />
       </svg>
-    </div>
-    <div class="h-10 w-9/12 mx-auto">
-      <nav class="list-none flex">
+
+      <nav class="list-none flex my-8 mx-8">
         <li
-          class="m-2 text-md border border-black py-1 px-4 hover:bg-black hover:text-white duration-200"
+          class="m-2 text-md border border-black py-2 px-4 hover:bg-black hover:text-white duration-200"
           v-for="link in navLinks"
           :key="link.name"
         >
@@ -36,9 +35,12 @@
         </li>
       </nav>
     </div>
+    <!-- <div class="h-10 w-9/12 mx-auto">
+
+    </div> -->
   </header>
 
-  <RouterView />
+  <Suspense><RouterView /><template v-slot:fallback>halo</template></Suspense>
 </template>
 
 <script lang="ts">

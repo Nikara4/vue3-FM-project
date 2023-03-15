@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <QuizBlockComponent />
     </div>
   </main>
