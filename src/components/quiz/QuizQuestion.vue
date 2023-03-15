@@ -6,12 +6,10 @@
       </h3>
       <li
         class="font-sans mx-10 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300 flex"
-        v-for="(answer, key) in arrayWithAllAnswers[index]"
+        v-for="(answer, key) in arrayWithMappedAnswers[index]"
         :key="answer"
-        @click="getAnswer(answer)"
-
       >
-      <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
+        <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
         <span class="block border-r border-black p-3 basis-12 text-center">{{
           key
         }}</span
@@ -29,9 +27,10 @@ export default {
   async setup(props) {
     const BASE_URL = 'https://opentdb.com/api.php?';
 
-    let quizQuestions: any[] = [];
+    let quizQuestions: any[];
     let arrayWithAllAnswers: any[] = [];
-    let normalisedQuestions: any[] = [];
+    let arrayWithMappedAnswers: any[] = [];
+    let normalisedQuestions: any[];
 
     const normaliseQuestions = () => {
       normalisedQuestions = quizQuestions.results.map((question: any) => {
@@ -75,25 +74,29 @@ export default {
     const getAllAnswers = () => {
       const questionLetters = ['A', 'B', 'C', 'D'];
 
-      arrayWithAllAnswers = quizQuestions.results.map((_quizQuestion: any) => {
-        let allAnswers = _quizQuestion.incorrect_answers.concat(
-          _quizQuestion.correct_answer
-        );
+      arrayWithMappedAnswers = quizQuestions.results.map(
+        (_quizQuestion: any) => {
+          let allAnswers = _quizQuestion.incorrect_answers.concat(
+            _quizQuestion.correct_answer
+          );
 
-        shuffleArray(allAnswers);
-        allAnswers = normaliseAnswers(allAnswers);
+          shuffleArray(allAnswers);
+          allAnswers = normaliseAnswers(allAnswers);
 
-        const allAnswersList = Object.assign(
-          {},
-          ...Object.entries({ ...questionLetters }).map(([a, b]: any) => ({
-            [b]: allAnswers[a],
-          }))
-        );
+          arrayWithAllAnswers.push(allAnswers);
 
-        return allAnswersList;
-      });
+          const allAnswersList = Object.assign(
+            {},
+            ...Object.entries({ ...questionLetters }).map(([a, b]: any) => ({
+              [b]: allAnswers[a],
+            }))
+          );
 
-      return arrayWithAllAnswers;
+          return allAnswersList;
+        }
+      );
+
+      return arrayWithMappedAnswers;
     };
 
     const fetchTrivia = async (index: string | string[]) => {
@@ -104,11 +107,12 @@ export default {
 
     quizQuestions = await fetchTrivia(props.categoryId);
     normalisedQuestions = normaliseQuestions();
-    arrayWithAllAnswers = getAllAnswers();
+    arrayWithMappedAnswers = getAllAnswers();
 
     return {
       quizQuestions,
       arrayWithAllAnswers,
+      arrayWithMappedAnswers,
       normalisedQuestions,
     };
   },
@@ -119,24 +123,13 @@ export default {
   emits: ['start-quiz'],
   data() {
     return {
-      arrayWithUserAnswers: [],
+      arrayWithUserAnswers: [] as any[],
       // answerSelected: null,
     };
   },
   methods: {
     startTheQuiz() {
       this.$emit('start-quiz');
-    },
-    getAnswer(answer: any) {
-for (let i = 0; i < this.arrayWithUserAnswers.length; i++) {}
-
-// napisać logikę dla pętli, która dodaje odpowiedzi do tablicy, usuwa te, które zostały zamienione i nie dodaje tych, które zostały juz wybrane
-
-      this.arrayWithUserAnswers.push(answer);
-      console.log(this.arrayWithUserAnswers);
-
-      // this.answerSelected = answer;
-
     },
   },
 };
