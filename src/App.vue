@@ -35,9 +35,6 @@
         </li>
       </nav>
     </div>
-    <!-- <div class="h-10 w-9/12 mx-auto">
-
-    </div> -->
   </header>
 
   <Suspense><RouterView /><template v-slot:fallback>halo</template></Suspense>

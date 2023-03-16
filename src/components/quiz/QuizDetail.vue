@@ -3,18 +3,22 @@
     class="bg-cover bg-center w-full h-60"
     :style="{ backgroundImage: getQuizImg() }"
   />
-  <div  class="w-full h-3 mb-2.5">
-    <div v-if="isQuizStarted" class="h-full bg-teal-700 duration-300" :style="{ width: barPercentage }"></div>
+  <div class="w-full h-3 mb-2.5">
+    <div
+      v-if="quizStarted"
+      class="h-full bg-teal-700 duration-300"
+      :style="{ width: barPercentage }"
+    ></div>
   </div>
   <div>
     <h3
       class="uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
     >
       {{ quizCategoryName.name }}
-      <span v-if="isQuizStarted">: question {{ questionStatus }}</span>
+      <span v-if="!showResults && quizStarted">: question {{ questionStatus }}</span>
     </h3>
   </div>
-  <div v-if="!isQuizStarted">
+  <div v-if="initialQuizPage">
     <p class="mx-10">{{ quizCategoryName.descr }}</p>
     <BasicButton @click-action="startTheQuiz">take the quiz </BasicButton>
   </div>
@@ -28,7 +32,14 @@ export default {
   components: {
     BasicButton,
   },
-  props: ['isQuizStarted', 'categoryId', 'questionStatus', 'barPercentage'],
+  props: [
+    'initialQuizPage',
+    'quizStarted',
+    'showResults',
+    'categoryId',
+    'questionStatus',
+    'barPercentage',
+  ],
   emits: ['start-quiz'],
   data() {
     return {
