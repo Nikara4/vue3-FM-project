@@ -1,15 +1,19 @@
 <template>
   <div v-if="isQuizStarted">
     <ul v-for="(question, index) in normalisedQuestions" :key="question">
-      <h3 class="uppercase font-sans font-semibold text-xl m-3">
+      <h3 class="uppercase font-sans font-semibold text-xl mx-10 my-8">
         {{ question }}
       </h3>
       <li
-        class="font-sans m-5"
-        v-for="(answer, key) in answers()[index]"
+        class="font-sans mx-10 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300 flex"
+        v-for="(answer, key) in arrayWithMappedAnswers[index]"
         :key="answer"
       >
-        {{ key }}: {{ answer }}
+        <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
+        <span class="block border-r border-black p-3 basis-12 text-center">{{
+          key
+        }}</span
+        ><span class="p-3 block">{{ answer }}</span>
       </li>
     </ul>
     <BasicButton @click-action="startTheQuiz"> next question </BasicButton>
@@ -19,34 +23,38 @@
 <script lang="ts">
 import BasicButton from '../button/BasicButton.vue';
 
-const BASE_URL =
-  'https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple';
-
 export default {
-  components: {
-    BasicButton,
-  },
-  props: ['isQuizStarted'],
-  emits: ['start-quiz'],
-  data() {
-    return {
-      quizQuestions: {},
-      normalisedQuestions: [],
-      answers: this.getAllAnswers,
+  async setup(props) {
+    const BASE_URL = 'https://opentdb.com/api.php?';
+
+    let quizQuestions: any[];
+    let arrayWithAllAnswers: any[] = [];
+    let arrayWithMappedAnswers: any[] = [];
+    let normalisedQuestions: any[];
+
+    const normaliseQuestions = () => {
+      normalisedQuestions = quizQuestions.results.map((question: any) => {
+        return question.question
+          .replace(/&quot;/g, '"')
+          .replace(/&#039;/g, "'");
+      });
+
+      return normalisedQuestions;
     };
-  },
-  methods: {
-    startTheQuiz() {
-      this.$emit('start-quiz');
-    },
-    async fetchTrivia() {
-      this.quizQuestions = await fetch(BASE_URL).then((response) =>
-        response.json()
-      );
-      this.getAllAnswers();
-      this.normaliseQuestions();
-    },
-    shuffleArray(array: []) {
+
+    const normaliseAnswers = (allAnswers: []) => {
+      return allAnswers.map((answer: any) => {
+        return answer
+          .replace(/&quot;/g, '"')
+          .replace(/&#039;/g, "'")
+          .replace(/&rsquo;/g, "'")
+          .replace(/&eacute;/g, 'é')
+          .replace(/&amp;/g, '&')
+          .replace(/&amp;/g, 'ü');
+      });
+    };
+
+    const shuffleArray = (array: []) => {
       let currentIndex = array.length,
         randomIndex;
 
@@ -61,37 +69,21 @@ export default {
       }
 
       return array;
-    },
-    normaliseQuestions() {
-      this.normalisedQuestions = this.quizQuestions.results.map(
-        (question: any) => {
-          return question.question
-            .replace(/&quot;/g, '"')
-            .replace(/&#039;/g, "'");
-        }
-      );
-    },
-    normaliseAnswers(allAnswers: []) {
-      return allAnswers.map((answer: any) => {
-        return answer
-          .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'")
-          .replace(/&rsquo;/g, "'")
-          .replace(/&eacute;/g, 'é')
-          .replace(/&amp;/g, '&');
-      });
-    },
-    getAllAnswers() {
+    };
+
+    const getAllAnswers = () => {
       const questionLetters = ['A', 'B', 'C', 'D'];
 
-      const arrayWithAllAnswers = this.quizQuestions.results.map(
+      arrayWithMappedAnswers = quizQuestions.results.map(
         (_quizQuestion: any) => {
           let allAnswers = _quizQuestion.incorrect_answers.concat(
             _quizQuestion.correct_answer
           );
 
-          this.shuffleArray(allAnswers);
-          allAnswers = this.normaliseAnswers(allAnswers);
+          shuffleArray(allAnswers);
+          allAnswers = normaliseAnswers(allAnswers);
+
+          arrayWithAllAnswers.push(allAnswers);
 
           const allAnswersList = Object.assign(
             {},
@@ -103,11 +95,42 @@ export default {
           return allAnswersList;
         }
       );
-      return arrayWithAllAnswers;
-    },
+
+      return arrayWithMappedAnswers;
+    };
+
+    const fetchTrivia = async (index: string | string[]) => {
+      return await fetch(
+        `${BASE_URL}amount=10&category=${index}&difficulty=medium&type=multiple`
+      ).then((response) => response.json());
+    };
+
+    quizQuestions = await fetchTrivia(props.categoryId);
+    normalisedQuestions = normaliseQuestions();
+    arrayWithMappedAnswers = getAllAnswers();
+
+    return {
+      quizQuestions,
+      arrayWithAllAnswers,
+      arrayWithMappedAnswers,
+      normalisedQuestions,
+    };
   },
-  created() {
-    this.fetchTrivia();
+  components: {
+    BasicButton,
+  },
+  props: ['isQuizStarted', 'categoryId'],
+  emits: ['start-quiz'],
+  data() {
+    return {
+      arrayWithUserAnswers: [] as any[],
+      // answerSelected: null,
+    };
+  },
+  methods: {
+    startTheQuiz() {
+      this.$emit('start-quiz');
+    },
   },
 };
 </script>

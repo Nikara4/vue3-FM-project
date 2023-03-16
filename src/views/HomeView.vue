@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <QuizBlockComponent />
     </div>
   </main>
@@ -9,7 +9,6 @@
 <script lang="ts">
 import QuizBlockComponent from '../components/quiz/QuizBlock.vue';
 import { useRoute } from 'vue-router';
-
 
 
 export default {

@@ -1,118 +1,62 @@
 <template>
-  <div v-if="isQuizStarted">
-    <ul v-for="(question, index) in normalisedQuestions" :key="question">
-      <h3 class="uppercase font-sans font-semibold text-xl m-3">
-        {{ question }}
+  <div>
+    <ul>
+      <h3 class="uppercase font-sans font-semibold text-xl mx-10 my-8">
+        {{ normaliseQuestions(question) }}
       </h3>
       <li
-        class="font-sans m-5"
-        v-for="(answer, key) in arrayWithAllAnswers[index]"
-        :key="answer"
+        class="font-sans mx-10 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300 flex"
+        :style="
+          `${answer}-${key}` === answerSelected && {
+            backgroundColor: `${selectedColor}`,
+          }
+        "
+        v-for="(answer, key) in answers"
+        :key="`${answer}-${key}`"
+        @click="onAnswerClick(answer, key)"
       >
-        {{ key }}: {{ answer }}
+        <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
+        <span class="block border-r border-black p-3 basis-12 text-center">{{
+          key
+        }}</span>
+        <span class="p-3 block">{{ normaliseAnswers(answer) }}</span>
       </li>
     </ul>
-    <BasicButton @click-action="startTheQuiz"> next question </BasicButton>
   </div>
 </template>
 
 <script lang="ts">
-import BasicButton from '../button/BasicButton.vue';
-
 export default {
-  components: {
-    BasicButton,
-  },
-  props: ['isQuizStarted', 'categoryId'],
-  emits: ['start-quiz'],
-  async setup(props) {
-    const BASE_URL = 'https://opentdb.com/api.php?';
-
-    let quizQuestions: any[] = [];
-    let arrayWithAllAnswers: any[] = [];
-    let normalisedQuestions: any[] = [];
-
-    const normaliseQuestions = () => {
-      normalisedQuestions = quizQuestions.results.map((question: any) => {
-        return question.question
-          .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'");
-      });
-
-      return normalisedQuestions;
-    };
-
-    const normaliseAnswers = (allAnswers: []) => {
-      return allAnswers.map((answer: any) => {
-        return answer
-          .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'")
-          .replace(/&rsquo;/g, "'")
-          .replace(/&eacute;/g, 'é')
-          .replace(/&amp;/g, '&');
-      });
-    };
-
-    const shuffleArray = (array: []) => {
-      let currentIndex = array.length,
-        randomIndex;
-
-      while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
-
-      return array;
-    };
-
-    const getAllAnswers = () => {
-      const questionLetters = ['A', 'B', 'C', 'D'];
-
-      arrayWithAllAnswers = quizQuestions.results.map((_quizQuestion: any) => {
-        let allAnswers = _quizQuestion.incorrect_answers.concat(
-          _quizQuestion.correct_answer
-        );
-
-        shuffleArray(allAnswers);
-        allAnswers = normaliseAnswers(allAnswers);
-
-        const allAnswersList = Object.assign(
-          {},
-          ...Object.entries({ ...questionLetters }).map(([a, b]: any) => ({
-            [b]: allAnswers[a],
-          }))
-        );
-
-        return allAnswersList;
-      });
-
-      return arrayWithAllAnswers;
-    };
-
-    const fetchTrivia = async (index: string | string[]) => {
-      return await fetch(
-        `${BASE_URL}amount=10&category=${index}&difficulty=medium&type=multiple`
-      ).then((response) => response.json());
-    };
-
-    quizQuestions = await fetchTrivia(props.categoryId);
-    normalisedQuestions = normaliseQuestions();
-    arrayWithAllAnswers = getAllAnswers();
-
+  props: ['question', 'answers', 'selected'],
+  emits: ['selectAnswer'],
+  data() {
     return {
-      quizQuestions,
-      arrayWithAllAnswers,
-      normalisedQuestions,
+      answerSelected: '',
+      selectedColor: 'rgb(156 163 175)',
     };
   },
   methods: {
-    startTheQuiz() {
-      this.$emit('start-quiz');
+    emitSelectedAnswer(answer: any) {
+      this.$emit('selectAnswer', answer);
+    },
+    onAnswerClick(answer: any, key: any) {
+      this.answerSelected = `${answer}-${key}`;
+      this.emitSelectedAnswer(answer);
+    },
+    normaliseAnswers(answer: string) {
+      return answer
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&rsquo;/g, "'")
+        .replace(/&eacute;/g, 'é')
+        .replace(/&amp;/g, '&')
+        .replace(/&amp;/g, 'ü');
+    },
+    normaliseQuestions(question: string) {
+      return question
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&eacute;/g, 'é');
     },
   },
 };
