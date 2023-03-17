@@ -5,7 +5,7 @@
         {{ normaliseQuestions(question) }}
       </h3>
       <li
-        class="font-sans mx-10 cursor-pointer hover:bg-gray-200 duration-200 active:bg-gray-300 flex"
+        class="font-sans mx-10 cursor-pointer hover:bg-teal-500 duration-200 active:bg-teal-600 flex"
         :style="
           `${answer}-${key}` === answerSelected && {
             backgroundColor: `${selectedColor}`,
@@ -15,7 +15,6 @@
         :key="`${answer}-${key}`"
         @click="onAnswerClick(answer, key)"
       >
-        <!-- :style="answer === answerSelected && {backgroundColor: 'rgb(156 163 175)'}" -->
         <span class="block border-r border-black p-3 basis-12 text-center">{{
           key
         }}</span>
@@ -32,7 +31,7 @@ export default {
   data() {
     return {
       answerSelected: '',
-      selectedColor: 'rgb(156 163 175)',
+      selectedColor: 'rgb(20 184 166)',
     };
   },
   methods: {

@@ -1,22 +1,29 @@
 <template>
   <main>
     <div class="container mx-auto">
-      <QuizBlockComponent />
+      <div class="max-h-max mx-auto">
+        <ul class="grid grid-cols-3">
+          <li v-for="quiz in quizCategory" :key="quiz.categoryNumber">
+            <QuizBlock :quiz="quiz" />
+          </li>
+        </ul>
+      </div>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import QuizBlockComponent from '../components/quiz/QuizBlock.vue';
-import { useRoute } from 'vue-router';
-
+import QuizBlock from '../components/quiz/QuizBlock.vue';
+import { quizzes } from '../composables/quizCategories.js';
 
 export default {
-  setup() {
-    const route = useRoute();
-  },
   components: {
-    QuizBlockComponent,
+    QuizBlock,
+  },
+  data() {
+    return {
+      quizCategory: quizzes,
+    };
   },
 };
 </script>

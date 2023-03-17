@@ -7,7 +7,7 @@
       >
       <input
         v-model.trim="search"
-        class="border-black border mx-1 my-10 p-2"
+        class="border-black border mx-1 my-10 px-2"
         placeholder="Search..."
       />
       <svg
@@ -27,23 +27,28 @@
 
       <nav class="list-none flex my-8 mx-8">
         <li
-          class="m-2 text-md border border-black py-2 px-4 hover:bg-black hover:text-white duration-200"
+        class=""
           v-for="link in navLinks"
           :key="link.name"
         >
-          <RouterLink :to="{ path: link.path }">{{ link.name }}</RouterLink>
+          <BasicButton><RouterLink :to="{ path: link.path }">{{ link.name }}</RouterLink></BasicButton>
         </li>
       </nav>
     </div>
   </header>
 
-  <Suspense><RouterView /><template v-slot:fallback>halo</template></Suspense>
+  <Suspense
+    ><RouterView /><template #pending
+      >Loading...</template
+  ></Suspense>
 </template>
 
 <script lang="ts">
 import { ref, watch } from 'vue';
+
 import { quizzes } from './composables/quizCategories.js';
 import { quizCategory } from './data/quizCategories.js';
+import BasicButton from './components/button/BasicButton.vue';
 
 export default {
   setup() {
@@ -59,7 +64,7 @@ export default {
       search,
     };
   },
-
+  components: {BasicButton},
   data() {
     return {
       navLinks: [

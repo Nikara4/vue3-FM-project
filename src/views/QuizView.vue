@@ -29,7 +29,7 @@
             >
               {{ isQuizFinished ? 'finish quiz' : 'next question' }}
             </BasicButton>
-            <div v-else class="mb-5"></div>
+            <div v-else class="mb-16"></div>
           </div>
           <div v-else-if="showResults && !isQuizStarted">
             <QuizResult
@@ -70,7 +70,7 @@ const selected = ref(false);
 const currentQuestionIndex = ref(0);
 const numberOfCorrectAnswers = ref(0);
 
-let quizQuestions: any[];
+let quizQuestions: {};
 let arrayWithMappedAnswers: any[] = [];
 
 const fetchTrivia = async (categoryId: string | string[]) => {
@@ -149,7 +149,6 @@ const onAnswerSelected = (answer: any) => {
   }
 
   selected.value = true;
-  console.log(selected.value)
 };
 
 const getQuizResults = () => {
