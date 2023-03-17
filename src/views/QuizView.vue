@@ -149,7 +149,6 @@ const onAnswerSelected = (answer: any) => {
   }
 
   selected.value = true;
-  console.log(selected.value)
 };
 
 const getQuizResults = () => {
