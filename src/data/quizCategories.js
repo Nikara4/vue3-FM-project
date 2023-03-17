@@ -35,4 +35,22 @@ export const quizCategory = [
     img: 'pexels-geography-5008436.jpeg',
     descr: 'Learning geography doesn\'t have to be boring. Do it the easy way with this quiz! In no time, you could learn to locate every single country in the world on a map.',
   },
+  {
+    name: 'Film',
+    categoryNumber: '11',
+    img: 'pexels-film-3945317.jpeg',
+    descr: 'Test your cinema IQ with questions about everything from Old Hollywood to today\'s blockbusters and beyond. Film buffs, this one\'s for you. Put your knowledge to the test and see how many movie trivia questions you can get right!' ,
+  },
+  {
+    name: 'Science: Computers',
+    categoryNumber: '18',
+    img: 'pexels-computers-50711.jpeg',
+    descr: 'The device on which you\'re viewing this quiz - do you know how it works? There is a vast amount of processes going on under the hood of whatever phone, laptop or tablet you use on a daily basis, an endless array of ones and zeroes all working together to display these words. How does it all work? Test your knowledge on that and all the other facets of computer science in this quiz!',
+  },
+  {
+    name: 'Entertainment: Comics',
+    categoryNumber: '29',
+    img: 'pexels-comics-7524996.jpeg',
+    descr: 'Are you a comic book fanatic? Can you name every character who\'s held the title of Ant-Man, rattle off the first appearances of the Justice League like your own birthday, and know by heart which creator gave birth to every major character? If so, these comic book trivia questions and answers are for you.',
+  },
 ];
