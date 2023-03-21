@@ -7,63 +7,55 @@
       >
       <div class="my-5">
         <p>
-          Hello there! I'm Nikara and I am a Frontend Developer. My main
-          language is JavaScript and I am currently expanding my framework
-          knowledge. This site is coded in Vue.js 3, as my main project when
-          learning the framework. The site provides many quiz from various
-          categories and I intend to expand the list (and later maybe the amount
-          of questions and difficulty). The API providing the questions comes
-          from
+          {{ about.descr }}
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            href="https://opentdb.com/"
-            >Open Trivia DB</a
+            :href="about.apiLink"
+            >{{ about.apiLinkDesc }}</a
           >.
         </p>
       </div>
       <div class="my-5">
         <p>
-          If you would like to know what I have planned for this site or simply
-          what to check out my code, visit the GitHub repository:
+          {{ about.repoDescr }}
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            href="https://github.com/Nikara4/vue3-quiz-project"
+            :href="about.githubProjectLink"
           >
-            vue3-quiz-project
+            {{ about.githubProjectDesc }}
           </a>
-          . Should you have any ideas, on how to build this site or want to let
-          me know what to code better, feel free to contact me.
+          {{ about.contactDesc }}
         </p></div
       >
       <div class="my-5">
         <p>
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            ref="https://github.com/Nikara4/MERN_it_memes_website/"
+            :href="about.portfolioLink"
           >
-            Portfolio
+            {{ about.portfolioDesc }}
           </a>
           /
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            href="https://www.linkedin.com/in/aleksandra-szczur/"
+            :href="about.linkedInLink"
           >
-            LinkedIn
+            {{ about.linkedInDesc }}
           </a>
           /
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            href="https://github.com/Nikara4/"
-            >GitHub</a
-          >
+            :href="about.githubLink"
+          ></a
+          >{{ about.githubDescr }}
         </p>
         <p>
           Email:
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"
-            href="mailto:olaszczur93@gmail.com"
-            >olaszczur93@gmail.com</a
-          >
+            :href="about.emailLink"
+          ></a
+          >{{ about.emailDescr }}
         </p></div
       >
     </div>
@@ -71,4 +63,13 @@
 </template>
 
 <script lang="ts">
+import { about } from '../data/about';
+
+export default {
+  data() {
+    return {
+      about: about,
+    };
+  },
+};
 </script>
