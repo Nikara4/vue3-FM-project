@@ -6,7 +6,7 @@
       </h3>
       <li
         class="font-sans mx-10 cursor-pointer hover:bg-teal-500 duration-200 active:bg-teal-600 flex"
-        :class="`${answer}-${key}` === answerSelected && 'clicked-question'"
+        :class="`${answer}-${key}` === answerSelected && 'clicked-answer'"
         v-for="(answer, key) in answers"
         :key="`${answer}-${key}`"
         @click="onAnswerClick(answer, key)"
@@ -56,8 +56,8 @@ export default {
 };
 </script>
 
-<style scoped> 
-  .clicked-question {
-    background-color: rgb(20 184 166),
+<style scoped>
+  .clicked-answer {
+    background-color: rgb(20 184 166)
   }
 </style>
