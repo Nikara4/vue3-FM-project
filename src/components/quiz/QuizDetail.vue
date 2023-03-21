@@ -62,7 +62,7 @@ export default {
       );
     },
     getQuizImg() {
-      return `url('../../../public/img/${this.quizCategoryName?.img}')`;
+      return `url('https://raw.githubusercontent.com/Nikara4/vue3-quiz-project/main/public/img/${this.quizCategoryName?.img}')`;
     },
   },
   created() {
