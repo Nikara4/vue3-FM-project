@@ -6,11 +6,7 @@
       </h3>
       <li
         class="font-sans mx-10 cursor-pointer hover:bg-teal-500 duration-200 active:bg-teal-600 flex"
-        :style="
-          `${answer}-${key}` === answerSelected && {
-            backgroundColor: `${selectedColor}`,
-          }
-        "
+        :style="setClickedStyles(answer, key)"
         v-for="(answer, key) in answers"
         :key="`${answer}-${key}`"
         @click="onAnswerClick(answer, key)"
@@ -56,6 +52,11 @@ export default {
         .replace(/&quot;/g, '"')
         .replace(/&#039;/g, "'")
         .replace(/&eacute;/g, 'é');
+    },
+    setClickedStyles(answer: any, key: any) {
+      return (`${answer}-${key}` === this.answerSelected) && {
+            backgroundColor: `${this.selectedColor}`,
+          }
     },
   },
 };

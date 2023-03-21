@@ -55,6 +55,20 @@ import QuizQuestion from '../components/quiz/QuizQuestion.vue';
 import BasicButton from '../components/button/BasicButton.vue';
 import QuizResult from '@/components/quiz/QuizResult.vue';
 
+type Question = {
+  category: string,
+  correct_answer: string,
+  difficulty: string,
+  incorrect_answers: [],
+  question: string,
+  type: string
+}
+
+type QuizQuestions = {
+response_code: number,
+results: Question[],
+}
+
 const BASE_URL = 'https://opentdb.com/api.php?';
 
 const route = useRoute();
@@ -70,7 +84,7 @@ const selected = ref(false);
 const currentQuestionIndex = ref(0);
 const numberOfCorrectAnswers = ref(0);
 
-let quizQuestions: {};
+let quizQuestions = {} as QuizQuestions;
 let arrayWithMappedAnswers: any[] = [];
 
 const fetchTrivia = async (categoryId: string | string[]) => {
@@ -159,6 +173,8 @@ const getQuizResults = () => {
 
 quizQuestions = await fetchTrivia(routeParams);
 arrayWithMappedAnswers = getAllMappedAnswers();
+
+console.log(quizQuestions)
 
 const questionStatus = computed(
   () => `${currentQuestionIndex.value + 1}/${quizQuestions.results.length}`

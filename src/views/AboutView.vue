@@ -71,11 +71,4 @@
 </template>
 
 <script lang="ts">
-import BasicLink from '@/components/link/BasicLink.vue';
-
-export default {
-  components: {
-    BasicLink,
-  },
-};
 </script>
