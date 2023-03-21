@@ -15,7 +15,9 @@
       class="uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
     >
       {{ quizCategoryName?.name }}
-      <span v-if="!showResults && quizStarted">: question {{ questionStatus }}</span>
+      <span v-if="!showResults && quizStarted"
+        >: question {{ questionStatus }}</span
+      >
     </h3>
   </div>
   <div v-if="initialQuizPage">
@@ -26,14 +28,8 @@
 
 <script lang="ts">
 import BasicButton from '../button/BasicButton.vue';
-import { quizCategory } from '../../data/quizCategories.js';
-
-type QuizCategoryName = {
-  categoryNumber: string,
-  name: string,
-  descr: string,
-  img: string,
-}
+import { quizCategory } from '../../data/quizCategories';
+import type { Quiz } from '../../types/quizCategories';
 
 export default {
   components: {
@@ -50,7 +46,7 @@ export default {
   emits: ['start-quiz'],
   data() {
     return {
-      quizCategoryName: {} as QuizCategoryName | undefined,
+      quizCategoryName: {} as Quiz | undefined,
       quizCategory: quizCategory,
     };
   },

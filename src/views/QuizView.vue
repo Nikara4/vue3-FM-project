@@ -33,9 +33,10 @@
           </div>
           <div v-else-if="showResults && !isQuizStarted">
             <QuizResult
-            :numberOfCorrectAnswers="numberOfCorrectAnswers"
-            :numberOfQuestions="quizQuestions.results.length"
-            :isQuizFinished="isQuizFinished" />
+              :numberOfCorrectAnswers="numberOfCorrectAnswers"
+              :numberOfQuestions="quizQuestions.results.length"
+              :isQuizFinished="isQuizFinished"
+            />
             <BasicButton v-if="!isInitialQuizPage" @click-action="startTheQuiz">
               retake the quiz
             </BasicButton>
@@ -56,18 +57,18 @@ import BasicButton from '../components/button/BasicButton.vue';
 import QuizResult from '@/components/quiz/QuizResult.vue';
 
 type Question = {
-  category: string,
-  correct_answer: string,
-  difficulty: string,
-  incorrect_answers: [],
-  question: string,
-  type: string
-}
+  category: string;
+  correct_answer: string;
+  difficulty: string;
+  incorrect_answers: [];
+  question: string;
+  type: string;
+};
 
 type QuizQuestions = {
-response_code: number,
-results: Question[],
-}
+  response_code: number;
+  results: Question[];
+};
 
 const BASE_URL = 'https://opentdb.com/api.php?';
 
@@ -90,7 +91,7 @@ let arrayWithMappedAnswers: any[] = [];
 const fetchTrivia = async (categoryId: string | string[]) => {
   return await fetch(
     `${BASE_URL}amount=10&category=${categoryId}&difficulty=easy&type=multiple`
-  ).then((response) => response.json());
+  ).then((response: { json: () => any; }) => response.json());
 };
 
 const shuffleArray = (array: []) => {
@@ -174,8 +175,6 @@ const getQuizResults = () => {
 quizQuestions = await fetchTrivia(routeParams);
 arrayWithMappedAnswers = getAllMappedAnswers();
 
-console.log(quizQuestions)
-
 const questionStatus = computed(
   () => `${currentQuestionIndex.value + 1}/${quizQuestions.results.length}`
 );
@@ -186,5 +185,5 @@ const barPercentage = computed(
       ((currentQuestionIndex.value + 1) / quizQuestions.results.length) * 100
     }%`
 );
-</script>
 
+</script>
