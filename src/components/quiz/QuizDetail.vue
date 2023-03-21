@@ -14,12 +14,12 @@
     <h3
       class="uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
     >
-      {{ quizCategoryName.name }}
+      {{ quizCategoryName?.name }}
       <span v-if="!showResults && quizStarted">: question {{ questionStatus }}</span>
     </h3>
   </div>
   <div v-if="initialQuizPage">
-    <p class="mx-10">{{ quizCategoryName.descr }}</p>
+    <p class="mx-10">{{ quizCategoryName?.descr }}</p>
     <BasicButton @click-action="startTheQuiz">take the quiz </BasicButton>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default {
   emits: ['start-quiz'],
   data() {
     return {
-      quizCategoryName: {} as QuizCategoryName,
+      quizCategoryName: {} as QuizCategoryName | undefined,
       quizCategory: quizCategory,
     };
   },
@@ -66,7 +66,7 @@ export default {
       );
     },
     getQuizImg() {
-      return `url('../../../public/img/${this.quizCategoryName.img}')`;
+      return `url('../../../public/img/${this.quizCategoryName?.img}')`;
     },
   },
   created() {

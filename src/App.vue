@@ -46,8 +46,8 @@
 <script lang="ts">
 import { ref, watch } from 'vue';
 
-import { quizzes } from './composables/quizCategories.js';
-import { quizCategory } from './data/quizCategories.js';
+import { quizzes } from './composables/quizCategories';
+import { quizCategory } from './data/quizCategories';
 import BasicButton from './components/button/BasicButton.vue';
 
 export default {

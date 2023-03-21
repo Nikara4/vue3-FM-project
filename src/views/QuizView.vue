@@ -187,3 +187,4 @@ const barPercentage = computed(
     }%`
 );
 </script>
+

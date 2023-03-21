@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import QuizBlock from '../components/quiz/QuizBlock.vue';
-import { quizzes } from '../composables/quizCategories.js';
+import { quizzes } from '../composables/quizCategories';
 
 export default {
   components: {
