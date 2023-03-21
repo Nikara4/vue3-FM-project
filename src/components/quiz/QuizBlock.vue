@@ -18,7 +18,7 @@ export default {
   props: ['quiz'],
   methods: {
     getQuizImg(quiz: any) {
-      return `url('public/img/${quiz.img}')`;
+      return `url('https://raw.githubusercontent.com/Nikara4/vue3-quiz-project/main/public/img/${quiz.img}')`;
     },
   },
 };
