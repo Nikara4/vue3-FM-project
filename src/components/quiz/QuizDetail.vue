@@ -28,6 +28,13 @@
 import BasicButton from '../button/BasicButton.vue';
 import { quizCategory } from '../../data/quizCategories.js';
 
+type QuizCategoryName = {
+  categoryNumber: string,
+  name: string,
+  descr: string,
+  img: string,
+}
+
 export default {
   components: {
     BasicButton,
@@ -43,7 +50,7 @@ export default {
   emits: ['start-quiz'],
   data() {
     return {
-      quizCategoryName: {},
+      quizCategoryName: {} as QuizCategoryName,
       quizCategory: quizCategory,
     };
   },
