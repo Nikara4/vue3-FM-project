@@ -58,6 +58,6 @@ The following are planned to be implemented:
 
 ## Inspiration
 
-The project has been inspired by a Vue.js 3 tutorial project done by Laith Academy:
+The project has been inspired by a Vue.js 3 tutorial project done by [Laith Academy](https://www.youtube.com/@laithacademy):
 [The Ultimate Vue 3 Tutorial (100% Composition API)](https://www.youtube.com/watch?v=I_xLMmNeLDY&ab_channel=LaithAcademy)
-[Laith Academy](https://www.youtube.com/@laithacademy)
+
