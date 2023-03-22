@@ -8,7 +8,7 @@
   </div>
   <div>
     <h3
-      class="xsm:text-lg uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-1"
+      class="xsm:text-xl uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-1"
     >
       {{ quizCategoryName?.name }}
       <span v-if="!showResults && quizStarted"
