@@ -1,9 +1,16 @@
 <template>
   <main>
-    <div class="container mx-auto">
+    <div class="w-screen">
       <div class="max-h-max mx-auto">
-        <div class="h-auto border border-black mx-10">
+        <div
+          class="xsm:mx-8 xsm:my-5 h-auto border border-black mx-10 2xl:mx-24 2xl:my-14 h-full"
+        >
           <div>
+            <div
+            v-if="!isQuizStarted && !showResults"
+              class="xsm:h-block-sm g-cover bg-center w-full h-60 2xl:h-respnsive-detail-img"
+              :style="{ backgroundImage: getQuizImg() }"
+            />
             <QuizDetail
               :quizStarted="isQuizStarted"
               @start-quiz="startTheQuiz"
@@ -12,6 +19,7 @@
               :barPercentage="barPercentage"
               :showResults="showResults"
               :initialQuizPage="isInitialQuizPage"
+              :quizCategoryName="quizCategoryName"
             />
           </div>
           <div v-if="isQuizStarted">
@@ -21,15 +29,17 @@
               @selectAnswer="onAnswerSelected"
               :selected="selected"
             />
-            <BasicButton
-              v-if="isAnswerSelected || isQuizFinished"
-              @click-action="
-                isQuizFinished ? getQuizResults() : getNextQuestion()
-              "
-            >
-              {{ isQuizFinished ? 'finish quiz' : 'next question' }}
-            </BasicButton>
-            <div v-else class="mb-16"></div>
+            <div class="xsm:m-5"
+              ><BasicButton
+                v-if="isAnswerSelected || isQuizFinished"
+                @click-action="
+                  isQuizFinished ? getQuizResults() : getNextQuestion()
+                "
+              >
+                {{ isQuizFinished ? 'finish quiz' : 'next question' }}
+              </BasicButton>
+              <div v-else class="mb-16"></div>
+            </div>
           </div>
           <div v-else-if="showResults && !isQuizStarted">
             <QuizResult
@@ -37,9 +47,14 @@
               :numberOfQuestions="quizQuestions.results.length"
               :isQuizFinished="isQuizFinished"
             />
-            <BasicButton v-if="!isInitialQuizPage" @click-action="startTheQuiz">
-              retake the quiz
-            </BasicButton>
+            <div class="xsm:m-5"
+              ><BasicButton
+                v-if="!isInitialQuizPage"
+                @click-action="startTheQuiz"
+              >
+                retake the quiz
+              </BasicButton></div
+            >
           </div>
         </div>
       </div>
@@ -55,6 +70,8 @@ import QuizDetail from '../components/quiz/QuizDetail.vue';
 import QuizQuestion from '../components/quiz/QuizQuestion.vue';
 import BasicButton from '../components/button/BasicButton.vue';
 import QuizResult from '@/components/quiz/QuizResult.vue';
+import { quizCategory } from '../data/quizCategories';
+import type { Quiz } from '../types/quizCategories';
 
 type Question = {
   category: string;
@@ -85,13 +102,14 @@ const selected = ref(false);
 const currentQuestionIndex = ref(0);
 const numberOfCorrectAnswers = ref(0);
 
+let quizCategoryName: Quiz | undefined;
 let quizQuestions = {} as QuizQuestions;
 let arrayWithMappedAnswers: any[] = [];
 
 const fetchTrivia = async (categoryId: string | string[]) => {
   return await fetch(
     `${BASE_URL}amount=10&category=${categoryId}&difficulty=easy&type=multiple`
-  ).then((response: { json: () => any; }) => response.json());
+  ).then((response: { json: () => any }) => response.json());
 };
 
 const shuffleArray = (array: []) => {
@@ -186,4 +204,12 @@ const barPercentage = computed(
     }%`
 );
 
+const getQuizImg = () => {
+  quizCategoryName = quizCategory.find(
+    (category: { categoryNumber: any }) => {
+      return category.categoryNumber === routeParams;
+    }
+  );
+  return `url('https://raw.githubusercontent.com/Nikara4/vue3-quiz-project/main/public/img/${quizCategoryName?.img}')`;
+};
 </script>

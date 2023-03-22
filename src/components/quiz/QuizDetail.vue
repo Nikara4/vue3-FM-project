@@ -1,18 +1,14 @@
 <template>
-  <div
-    class="bg-cover bg-center w-full h-60"
-    :style="{ backgroundImage: getQuizImg() }"
-  />
-  <div class="w-full h-3 mb-2.5">
+  <div  class="xsm:h-bar-sm w-full h-3 mb-2.5 2xl:h-14">
     <div
-      v-if="quizStarted"
-      class="h-full bg-teal-700 duration-300"
+    v-if="quizStarted"
+      class="h-full-h bg-teal-700 duration-300 "
       :style="{ width: barPercentage }"
-    ></div>
+    />
   </div>
   <div>
     <h3
-      class="uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
+      class="xsm:text-xl uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-1"
     >
       {{ quizCategoryName?.name }}
       <span v-if="!showResults && quizStarted"
@@ -21,15 +17,17 @@
     </h3>
   </div>
   <div v-if="initialQuizPage">
-    <p class="mx-10">{{ quizCategoryName?.descr }}</p>
-    <BasicButton @click-action="startTheQuiz">take the quiz </BasicButton>
+    <p class="xsm:text-sm mx-10">{{ quizCategoryName?.descr }}</p>
+    <div class="xsm:m-5">
+      <BasicButton @click-action="startTheQuiz"
+        >take the quiz
+      </BasicButton></div
+    >
   </div>
 </template>
 
 <script lang="ts">
 import BasicButton from '../button/BasicButton.vue';
-import { quizCategory } from '../../data/quizCategories';
-import type { Quiz } from '../../types/quizCategories';
 
 export default {
   components: {
@@ -42,31 +40,13 @@ export default {
     'categoryId',
     'questionStatus',
     'barPercentage',
+    'quizCategoryName'
   ],
   emits: ['start-quiz'],
-  data() {
-    return {
-      quizCategoryName: {} as Quiz | undefined,
-      quizCategory: quizCategory,
-    };
-  },
   methods: {
     startTheQuiz() {
       this.$emit('start-quiz');
     },
-    getQuizCategory() {
-      this.quizCategoryName = this.quizCategory.find(
-        (category: { categoryNumber: any }) => {
-          return category.categoryNumber === this.categoryId;
-        }
-      );
-    },
-    getQuizImg() {
-      return `url('https://raw.githubusercontent.com/Nikara4/vue3-quiz-project/main/public/img/${this.quizCategoryName?.img}')`;
-    },
-  },
-  created() {
-    this.getQuizCategory();
   },
 };
 </script>

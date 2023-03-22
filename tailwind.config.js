@@ -15,7 +15,16 @@ module.exports = {
     },
     lineHeight: {
         'quiz-block': '14rem',
-      }
+      },
+    height: {
+      'block-sm': '12rem',
+      'bar-sm': '14px',
+      'full-h': '100%',
+      'respnsive-detail-img': '36rem'
+    },
+    screens: {
+      'xsm': '360px',
+    }
   },
   plugins: [],
 }

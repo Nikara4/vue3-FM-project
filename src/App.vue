@@ -1,13 +1,14 @@
 <template>
   <header>
-    <div class="flex w-9/12 mx-auto">
+    <div class="flex w-9/12 px-5 2xl:w-11/12">
       <h1
-        class="font-sans text-5xl antialiased font-semibold tracking-wider my-8 mr-5"
+        class="xsm:basis-3/4 xsm:text-5xl xsm:mr-5 font-sans text-5xl antialiased font-semibold tracking-wider my-3 mr-5  2xl:text-8xl 2xl:mr-10"
         ><RouterLink to="/">Quizzes</RouterLink></h1
       >
       <input
         v-model.trim="search"
-        class="border-black border mx-1 my-10 px-2"
+        class="xsm:basis-1/4 xsm:w-24 xsm:my-6 xsm:text-sm xsm:p-2 xsm:h-full-h
+        border-black border mx-1 my-10 px-2 2xl:my-14 2xl:text-3xl"
         placeholder="Search..."
       />
       <svg
@@ -16,7 +17,7 @@
         viewBox="0 0 24 24"
         strokeWidth="{1.5}"
         stroke="currentColor"
-        class="my-11 w-8 h-8"
+        class="xsm:opacity-0 xsm:w-0 w-8 h-8 2xl:h-16 2xl:w-16 2xl:my-14"
       >
         <path
           strokeLinecap="round"
@@ -24,17 +25,16 @@
           d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
         />
       </svg>
-
-      <nav class="list-none flex my-8 mx-8">
-        <li
+    </div>
+    <nav class="xsm:my-0 xsm:list-none flex m-8 2xl:m-12">
+        <div
         class=""
           v-for="link in navLinks"
           :key="link.name"
         >
           <BasicButton><RouterLink :to="{ path: link.path }">{{ link.name }}</RouterLink></BasicButton>
-        </li>
+      </div>
       </nav>
-    </div>
   </header>
 
   <Suspense
