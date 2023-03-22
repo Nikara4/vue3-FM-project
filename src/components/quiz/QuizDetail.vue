@@ -1,18 +1,17 @@
 <template>
   <div
-    class="bg-cover bg-center w-full h-60 2xl:h-respnsive-detail-img"
+    class="xsm:h-block-sm g-cover bg-center w-full h-60 2xl:h-respnsive-detail-img"
     :style="{ backgroundImage: getQuizImg() }"
   />
-  <div class="w-full h-3 mb-2.5 2xl:h-14">
+  <div v-if="quizStarted" class="xsm:h-bar-sm w-full h-3 mb-2.5 2xl:h-14">
     <div
-      v-if="quizStarted"
-      class="h-full bg-teal-700 duration-300"
+      class="h-full-h bg-teal-700 duration-300"
       :style="{ width: barPercentage }"
-    ></div>
+    />
   </div>
   <div>
     <h3
-      class="uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
+      class="xsm:text-3xl xsm:mt-10 uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
     >
       {{ quizCategoryName?.name }}
       <span v-if="!showResults && quizStarted"
@@ -21,8 +20,12 @@
     </h3>
   </div>
   <div v-if="initialQuizPage">
-    <p class="mx-10">{{ quizCategoryName?.descr }}</p>
-    <BasicButton @click-action="startTheQuiz">take the quiz </BasicButton>
+    <p class="xsm:text-xl xsm:my-5 mx-10">{{ quizCategoryName?.descr }}</p>
+    <div class="xsm:m-5">
+      <BasicButton @click-action="startTheQuiz"
+        >take the quiz
+      </BasicButton></div
+    >
   </div>
 </template>
 

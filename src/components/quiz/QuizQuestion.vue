@@ -1,11 +1,11 @@
 <template>
   <div>
     <ul>
-      <h3 class="uppercase font-sans font-semibold text-xl mx-10 my-8">
+      <h3 class="xsm:text-2xl xsm:mx-5 uppercase font-sans font-semibold text-xl mx-10 my-8">
         {{ normaliseQuestions(question) }}
       </h3>
       <li
-        class="font-sans mx-10 cursor-pointer hover:bg-teal-500 duration-200 active:bg-teal-600 flex"
+        class="xsm:text-xl font-sans mx-10 cursor-pointer hover:bg-teal-500 duration-200 active:bg-teal-600 flex"
         :class="`${answer}-${key}` === answerSelected && 'clicked-answer'"
         v-for="(answer, key) in answers"
         :key="`${answer}-${key}`"

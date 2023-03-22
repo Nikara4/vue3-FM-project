@@ -18,6 +18,7 @@ module.exports = {
       },
     height: {
       'block-sm': '16rem',
+      'bar-sm': '16px',
       'full-h': '100%',
       'respnsive-detail-img': '36rem'
     },

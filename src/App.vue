@@ -1,8 +1,8 @@
 <template>
   <header>
-    <div class="xxsm:w-screen flex w-9/12 px-5 2xl:w-11/12">
+    <div class="xsm:w-screen flex w-9/12 px-5 2xl:w-11/12">
       <h1
-        class="xsm:text-6xl xsm:mr-3 font-sans text-5xl antialiased font-semibold tracking-wider my-3 mr-5  2xl:text-8xl 2xl:mr-10"
+        class="xsm:text-6xl xsm:mr-2 font-sans text-5xl antialiased font-semibold tracking-wider my-3 mr-5  2xl:text-8xl 2xl:mr-10"
         ><RouterLink to="/">Quizzes</RouterLink></h1
       >
       <input

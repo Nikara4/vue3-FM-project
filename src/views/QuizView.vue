@@ -1,8 +1,8 @@
 <template>
   <main>
-    <div class="container mx-auto">
+    <div class="w-screen">
       <div class="max-h-max mx-auto">
-        <div class="h-auto border border-black mx-10 2xl:mx-24 2xl:my-14 h-full">
+        <div class="xsm:mx-8 xsm:my-12 h-auto border border-black mx-10 2xl:mx-24 2xl:my-14 h-full">
           <div>
             <QuizDetail
               :quizStarted="isQuizStarted"
@@ -21,7 +21,7 @@
               @selectAnswer="onAnswerSelected"
               :selected="selected"
             />
-            <BasicButton
+            <div class="xsm:m-5"><BasicButton
               v-if="isAnswerSelected || isQuizFinished"
               @click-action="
                 isQuizFinished ? getQuizResults() : getNextQuestion()
@@ -29,7 +29,7 @@
             >
               {{ isQuizFinished ? 'finish quiz' : 'next question' }}
             </BasicButton>
-            <div v-else class="mb-16"></div>
+            <div v-else class="mb-16"></div>    </div>
           </div>
           <div v-else-if="showResults && !isQuizStarted">
             <QuizResult
@@ -37,9 +37,10 @@
               :numberOfQuestions="quizQuestions.results.length"
               :isQuizFinished="isQuizFinished"
             />
-            <BasicButton v-if="!isInitialQuizPage" @click-action="startTheQuiz">
+            <div class="xsm:m-5"><BasicButton v-if="!isInitialQuizPage" @click-action="startTheQuiz">
               retake the quiz
-            </BasicButton>
+            </BasicButton></div>
+            
           </div>
         </div>
       </div>
