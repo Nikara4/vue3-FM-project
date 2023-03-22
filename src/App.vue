@@ -1,13 +1,13 @@
 <template>
   <header>
-    <div class="flex w-9/12 mx-auto">
+    <div class="flex w-9/12 mx-auto 2xl:w-11/12">
       <h1
-        class="font-sans text-5xl antialiased font-semibold tracking-wider my-8 mr-5"
+        class="font-sans text-5xl antialiased font-semibold tracking-wider my-8 mr-5  2xl:text-8xl 2xl:mr-10"
         ><RouterLink to="/">Quizzes</RouterLink></h1
       >
       <input
         v-model.trim="search"
-        class="border-black border mx-1 my-10 px-2"
+        class="border-black border mx-1 my-10 px-2 2xl:my-12 2xl:text-2xl"
         placeholder="Search..."
       />
       <svg
@@ -16,7 +16,7 @@
         viewBox="0 0 24 24"
         strokeWidth="{1.5}"
         stroke="currentColor"
-        class="my-11 w-8 h-8"
+        class="my-11 w-8 h-8 2xl:h-16 2xl:w-16"
       >
         <path
           strokeLinecap="round"
@@ -25,7 +25,7 @@
         />
       </svg>
 
-      <nav class="list-none flex my-8 mx-8">
+      <nav class="list-none flex m-8 2xl:m-12">
         <li
         class=""
           v-for="link in navLinks"
