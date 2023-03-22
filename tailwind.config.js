@@ -20,6 +20,9 @@ module.exports = {
       'block-sm': '16rem',
       'full-h': '100%',
       'respnsive-detail-img': '36rem'
+    },
+    screens: {
+      'xsm': '360px',
     }
   },
   plugins: [],
