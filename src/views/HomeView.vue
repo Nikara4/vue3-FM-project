@@ -2,7 +2,7 @@
   <main>
     <div class="container mx-auto">
       <div class="max-h-max mx-auto">
-        <ul class="grid grid-cols-3">
+        <ul class="sm:grid-cols-1 grid grid-cols-3 2xl:grid-cols-2">
           <li v-for="quiz in quizCategory" :key="quiz.categoryNumber">
             <QuizBlock :quiz="quiz" />
           </li>

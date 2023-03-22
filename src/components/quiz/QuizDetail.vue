@@ -1,9 +1,9 @@
 <template>
   <div
-    class="bg-cover bg-center w-full h-60"
+    class="bg-cover bg-center w-full h-60 2xl:h-respnsive-detail-img"
     :style="{ backgroundImage: getQuizImg() }"
   />
-  <div class="w-full h-3 mb-2.5">
+  <div class="w-full h-3 mb-2.5 2xl:h-14">
     <div
       v-if="quizStarted"
       class="h-full bg-teal-700 duration-300"

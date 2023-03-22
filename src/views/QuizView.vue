@@ -2,7 +2,7 @@
   <main>
     <div class="container mx-auto">
       <div class="max-h-max mx-auto">
-        <div class="h-auto border border-black mx-10">
+        <div class="h-auto border border-black mx-10 2xl:mx-24 2xl:my-14 h-full">
           <div>
             <QuizDetail
               :quizStarted="isQuizStarted"
