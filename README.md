@@ -15,6 +15,7 @@ Live view: [Check Your Knowledge](https://check-your-knowledge.netlify.app/)
 - [Features](#features)
 - [Status](#status)
 - [Planned implementations](#planned-implementations)
+- [Updates](#updates)
 - [Inspiration](#inspiration)
 
 ## General info
@@ -46,15 +47,19 @@ COMPLETED:
 - working JS code,
 - search engine for quizzes,
 - **information dialogs**: creating client side information dialogs/snackbars for success/info/warning/error informations from the backend,
-- **refactor of all dialogs and forms**.
+- **refactor of all dialogs and forms**,
+- **responsiveness**: for mobile and tablet views.
 
 ## Planned implementations
 
 The following are planned to be implemented:
 
 - **new categories**: adding more quiz categories to the site,
-- **responsiveness**: for mobile and tablet views,
 - **choosing amount of questions and difficulty**,
+
+## Updates
+
+[23/03/2023] Add responsiveness in design for tablet and desktop.
 
 ## Inspiration
 

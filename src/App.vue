@@ -20,7 +20,7 @@
         viewBox="0 0 24 24"
         strokeWidth="{1.5}"
         stroke="currentColor"
-        class="xsm:opacity-0 xsm:w-0 w-8 h-8 2xl:h-16 2xl:w-16 2xl:my-14"
+        class="xsm:opacity-0 xsm:w-0 lg:opacity-100 lg:basis-8"
       >
         <path
           strokeLinecap="round"
