@@ -3,7 +3,7 @@
     <div class="w-screen xl:w-8/12 xl:mx-auto">
       <div class="max-h-max mx-auto">
         <div
-          class="xsm:mx-8 xsm:my-5 lg:m-10 xl:m-0 h-auto border border-black h-full"
+          class="xsm:mx-8 xsm:my-5 lg:m-10 xl:mx-0 xl:my-16 h-auto border border-black h-full"
         >
           <div>
             <div

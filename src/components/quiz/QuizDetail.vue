@@ -17,7 +17,7 @@
     </h3>
   </div>
   <div v-if="initialQuizPage">
-    <p class="xsm:text-sm xl:text-xl mx-10">{{ quizCategoryName?.descr }}</p>
+    <p class="xsm:text-sm xl:text-xl xl:my-5 mx-10">{{ quizCategoryName?.descr }}</p>
     <div class="xsm:m-5">
       <BasicButton @click-action="startTheQuiz"
         >take the quiz
