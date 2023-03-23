@@ -1,14 +1,14 @@
 <template>
   <main>
-    <div class="w-screen">
+    <div class="w-screen xl:w-8/12 xl:mx-auto">
       <div class="max-h-max mx-auto">
         <div
-          class="xsm:mx-8 xsm:my-5 h-auto border border-black mx-10 2xl:mx-24 2xl:my-14 h-full"
+          class="xsm:mx-8 xsm:my-5 lg:m-10 xl:m-0 h-auto border border-black h-full"
         >
           <div>
             <div
             v-if="!isQuizStarted && !showResults"
-              class="xsm:h-block-sm g-cover bg-center w-full h-60 2xl:h-respnsive-detail-img"
+              class="xsm:h-block-sm lg:h-block-lg xl:h-block-xl g-cover bg-center w-full"
               :style="{ backgroundImage: getQuizImg() }"
             />
             <QuizDetail

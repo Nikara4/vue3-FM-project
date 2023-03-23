@@ -1,8 +1,8 @@
 <template>
   <main>
-    <div class="w-screen">
+    <div class="w-screen xl:w-10/12 xl:mx-auto">
       <div class="max-h-max">
-        <ul class="xsm:grid-cols-1 grid grid-cols-3 2xl:grid-cols-2">
+        <ul class="grid xsm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
           <li v-for="quiz in quizCategory" :key="quiz.categoryNumber">
             <QuizBlock :quiz="quiz" />
           </li>

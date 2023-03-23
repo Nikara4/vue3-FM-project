@@ -2,10 +2,10 @@
   <main>
     <div class="xsm:my-16 xsm:w-screen antialiased max-h-max w-3/5">
       <h1
-        class="xsm:w-full xsm:text-center xsm:m-0 xsm:text-2xl uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-3"
+        class="xsm:w-full xsm:text-center xsm:m-0 xsm:text-2xl uppercase font-sans antialiased font-semibold xl:text-3xl"
         >About the creator</h1
       >
-      <div class="xsm:mx-5 my-5 xsm:text-lg">
+      <div class="xsm:mx-5 lg:mx-20 xl:mx-48 my-5 xsm:text-lg lg:text-xl">
         <p>
           {{ about.descr }}
           <a
@@ -15,7 +15,7 @@
           >.
         </p>
       </div>
-      <div class="xsm:mx-5 my-5 xsm:text-lg">
+      <div class="xsm:mx-5 lg:mx-20 xl:mx-48 y-5 xsm:text-lg lg:text-xl">
         <p>
           {{ about.repoDescr }}
           <a
@@ -27,7 +27,7 @@
           {{ about.contactDesc }}
         </p></div
       >
-      <div class="xsm:mx-5 my-5 xsm:text-lg">
+      <div class="xsm:mx-5 lg:mx-20 xl:mx-48 my-5 xsm:text-lg lg:text-xl">
         <p>
           <a
             class="text-teal-700 hover:text-white hover:bg-teal-700 duration-300"

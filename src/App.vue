@@ -1,14 +1,17 @@
 <template>
   <header>
-    <div class="flex w-9/12 px-5 2xl:w-11/12">
+    <div class="flex justify-start xsm:w-full w-9/12 px-5 2xl:w-11/12">
       <h1
-        class="xsm:basis-3/4 xsm:text-5xl xsm:mr-5 font-sans text-5xl antialiased font-semibold tracking-wider my-3 mr-5  2xl:text-8xl 2xl:mr-10"
+        class="xsm:text-4xl xsm:mr-5 
+        lg:text-5xl lg:my-8
+        font-sans text-5xl antialiased font-semibold tracking-wider my-3 mr-5"
         ><RouterLink to="/">Quizzes</RouterLink></h1
       >
       <input
         v-model.trim="search"
-        class="xsm:basis-1/4 xsm:w-24 xsm:my-6 xsm:text-sm xsm:p-2 xsm:h-full-h
-        border-black border mx-1 my-10 px-2 2xl:my-14 2xl:text-3xl"
+        class="xsm:basis-2/4 xsm:w-24 xsm:my-5 xsm:text-sm xsm:p-2 xsm:h-full-h
+        lg:text-xl lg:my-9
+        border-black border mx-1 my-10 px-2"
         placeholder="Search..."
       />
       <svg
@@ -26,7 +29,7 @@
         />
       </svg>
     </div>
-    <nav class="xsm:my-0 xsm:list-none flex m-8 2xl:m-12">
+    <nav class="xsm:my-0 lg:m-5 xl:mx-32 list-none  flex m-8">
         <div
         class=""
           v-for="link in navLinks"
