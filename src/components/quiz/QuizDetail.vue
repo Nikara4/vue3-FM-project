@@ -1,5 +1,5 @@
 <template>
-  <div  class="xsm:h-bar-sm w-full h-3 mb-2.5 2xl:h-14">
+  <div  class="xsm:h-bar-sm w-full h-3 mb-2.5">
     <div
     v-if="quizStarted"
       class="h-full-h bg-teal-700 duration-300 "
@@ -8,7 +8,7 @@
   </div>
   <div>
     <h3
-      class="xsm:text-xl uppercase font-sans antialiased font-semibold text-2xl ml-5 mb-1"
+      class="xsm:text-xl xl:text-3xl uppercase font-sans antialiased font-semibold ml-5 mb-1"
     >
       {{ quizCategoryName?.name }}
       <span v-if="!showResults && quizStarted"
@@ -17,7 +17,7 @@
     </h3>
   </div>
   <div v-if="initialQuizPage">
-    <p class="xsm:text-sm mx-10">{{ quizCategoryName?.descr }}</p>
+    <p class="xsm:text-sm xl:text-xl mx-10">{{ quizCategoryName?.descr }}</p>
     <div class="xsm:m-5">
       <BasicButton @click-action="startTheQuiz"
         >take the quiz
